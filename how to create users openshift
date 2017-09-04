@@ -1,0 +1,26 @@
+#Check http password: 
+
+cat /etc/origin/master/htpasswd
+
+#create user
+
+oc create user password
+
+#set password:
+
+htpasswd -b /etc/origin/master/htpasswd user password
+
+#restart services
+
+systemctl restart atomic-openshift-master-api atomic-openshift-master-controllers
+
+#check openshift users
+
+#script
+
+oc create user password
+htpasswd -b /etc/origin/master/htpasswd user password
+systemctl restart atomic-openshift-master-api atomic-openshift-master-controllers
+cat /etc/origin/master/htpasswd
+oc get user
+
